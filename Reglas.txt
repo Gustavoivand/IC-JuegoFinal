@@ -1,0 +1,63 @@
+Propuesta Proyecto BIC01  para 2 o 3 personas por grupo.
+=============================================== 
+
+
+El resultado sera el código y un reporte de no mas de 5 paginas
+con una explicacion del juego y las  imágenes del programa
+corriendo y sus conclusiones.
+
+Objetivo:
+El objetivo del juego es navegar a través de un laberinto y llegar al punto de salida mientras se superan los desafíos presentados en varios lugares dentro del laberinto.
+
+Flujo del juego:
+
+El jugador comienza en la entrada del laberinto y se le proporciona una representación textual del diseño del laberinto. (puede ser 1D o 2D) 
+El jugador puede ingresar comandos para moverse en diferentes direcciones (arriba, abajo, izquierda, derecha) para navegar por el laberinto.
+A medida que el jugador se mueve, encontrará desafíos colocados al azar en ciertos lugares dentro del laberinto.
+La cantidad de tipos  de desafios a implementar depende del numero de integrantes del grupo. 
+(p. ej: 3 integrantes  - implementan 2  tipos de desafios).
+(p. ej: 2 integrantes  - implementan 1  tipo de desafio). 
+Los desafíos pueden incluir adivinar números, jugar piedra, papel o tijera o resolver acertijos del ahorcado, u otros similares.
+La finalización exitosa de un desafío le permite al jugador continuar su viaje a través del laberinto.
+Los desafíos incorrectos o fallidos pueden resultar en penalizaciones, como la pérdida de salud o el regreso a una ubicación anterior.
+El jugador debe llegar al punto de salida del laberinto para ganar el juego.
+Laberinto:
+
+El laberinto se representará como una cuadrícula, donde cada celda representa una ubicación.
+La ubicación actual del jugador se indica por su posición dentro de la cuadrícula. (puede ser 1D o 2D)
+Las paredes u obstáculos están representados por símbolos específicos en la cuadrícula para indicar áreas intransitables.
+Las celdas vacías representan caminos navegables donde el jugador puede moverse libremente.
+Los tipos de Desafíos pueden ser p. ej. los siguientes:
+a. Adivinanzas  de Números  :
+
+El jugador puede encontrar un desafío en el que tiene que adivinar un número generado aleatoriamente dentro de un rango determinado.
+El jugador recibe sugerencias, como si el número es mayor o menor que su suposición anterior.
+El jugador tiene un número limitado de intentos para adivinar el número correcto.
+b. Piedra Papel tijeras:
+
+El jugador puede enfrentarse a un oponente (controlado por computadora) en un juego de piedra, papel o tijera.
+Tanto el jugador como el oponente seleccionan una de las tres opciones: piedra, papel o tijera.
+El ganador se determina en base a las reglas tradicionales de piedra, papel o tijera.
+El jugador necesita ganar un cierto número de rondas para tener éxito en el desafío.
+C. Verdugo:
+
+El jugador puede encontrar un rompecabezas de palabras representado por guiones bajos, que indica el número de letras en la palabra.
+El jugador necesita adivinar las letras de la palabra dentro de un número limitado de intentos.
+Después de cada suposición incorrecta,  disminuye el porcentaje de vida .
+Si el jugador adivina todas las letras antes de que  se acabe el porcentaje, gana el desafío.
+
+Sanidad y Sanciones:
+El jugador puede tener un nivel de salud o energía que disminuye al enfrentarse a un desafío o al hacer conjeturas incorrectas.
+Si la salud del jugador llega a cero o cae por debajo de cierto umbral, pierde el juego.
+Acertar incorrectamente un desafío o perder en un juego de piedra, papel o tijera puede resultar en una penalización de salud.
+No resolver el acertijo del ahorcado dentro de los intentos permitidos también puede dar lugar a una penalización de salud.
+Condiciones ganadoras y perdedoras:
+
+El jugador gana el juego cuando llega al punto de salida del laberinto.
+El jugador pierde el juego si su nivel de salud o energía cae a cero.
+Al ganar o perder, el jugador recibe los mensajes apropiados y el juego termina.
+La implementación de estas reglas en C ++ requerirá el diseño de la estructura del laberinto, el manejo de la entrada del usuario para el movimiento, la generación de desafíos, la gestión de los niveles de salud y la visualización de mensajes apropiados para diferentes escenarios.
+
+Recuerde dividir el proceso de desarrollo en tareas manejables, como la creación de funciones para el laberinto, los desafíos, los atributos de los jugadores y el flujo del juego, para garantizar un enfoque organizado y estructurado de la programación.
+
+======================
