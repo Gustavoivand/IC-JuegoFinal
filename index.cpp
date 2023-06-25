@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
 int main(){
-    std::cout<<"Esteban de la comes";
+    //aqui te la comes, papi.
+    std::cout<<"Esteban, te la comes";
 }
