@@ -25,6 +25,7 @@ void clrscr();
 //JUEGO PRINCIPAL
 int main(){
     srand(time(NULL));
+    clrscr();
     //preguntar al usuario por el numero de filas y columnas de la matriz cuadrada
     std::cout<<"BIENVENIDO AL LABERINTO DE LA FC-UNI"<<endl;
     system("pause");
@@ -63,7 +64,7 @@ int main(){
             {
                 laberinto[i][j]=1;
             }else{
-                laberinto[i][j]=probabilidad(0,1,60,40);
+                laberinto[i][j]=probabilidad(0,1,55,45);
             }
             
         }
@@ -106,13 +107,20 @@ int main(){
     }
 
 
+    std::cout<<"Suerte en el desafio, "<<nombre<<endl;
+    std::cout<<"Usa las flechas para moverte"<<endl;
+    std::cout<<"Cuidado por donde pisas, puedes encontrar trampas en el camino"<<endl;
+    system("pause");
+
+
+    clrscr();
     //imprimir laberinto
     x=0;
     y=0;
     bool exito=false;
     while (!exito)
     {
-        
+        std::cout<<"Cuidado por donde pisas, "<<nombre<<". Puedes encontrar trampas en el camino"<<endl;
         std::cout<<endl;
         string inicial=nombre.substr(0,1);
         for (int i = 0; i < filas; i++)
@@ -134,8 +142,6 @@ int main(){
             }
             std::cout<<endl;
         }
-        
-        
         
         
         int c = 0;
@@ -176,11 +182,13 @@ int main(){
             }
         }
         
-
+        clrscr();
         if (x==filas-1&&y==columnas-1)
         {
             exito=true;
+            std::cout<<"Felicidades, "<<nombre<<". Lograste salir del laberinto."<<endl;
         }
+        
     }
     return 0;
 }
@@ -211,3 +219,7 @@ void limites(int& variable, int inferior,int superior){
 }
 
 //Borrar informacion de pantalla
+void clrscr()
+{
+  system("cls");
+}
