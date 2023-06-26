@@ -2,11 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <conio.h>
 using namespace std;
+//VARIABLES GLOBALES
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
 //DECLARACION DE FUNCIONES
 
 //Funcion de probabilidad de 2 numeros
 int probabilidad(int, int, int, int);
+
+//Funcion para establecer limite de movimiento
+void limites(int&, int ,int );
 
 
 //JUEGO PRINCIPAL
@@ -27,7 +37,6 @@ int main(){
         std::cout<<"tu laberinto debe tener al menos 4 filas"<<endl;
         std::cin>>filas;
     }
-    
     std::cout<<"Escoge la cantidad de columnas de tu laberinto, recuerda que el mínimo posible es 4"<<endl;
     int columnas;
     std::cin>>columnas;
@@ -37,10 +46,12 @@ int main(){
         std::cin>>columnas;
     }
 
-
     //crear laberinto
     int laberinto[filas][columnas];
     
+    //crea una matriz binaria 
+    //se puede transitar por los 1
+    //los 0 son los muros del laberinto
     for (int i = 0; i < filas; i++)
     {
         for (int j = 0; j < columnas; j++)
@@ -90,34 +101,85 @@ int main(){
             solucion=true;
         }  
     }
+
+
     //imprimir laberinto
-    std::cout<<endl;
-    for (int i = 0; i < filas; i++)
+    x=0;
+    y=0;
+    bool exito=false;
+    while (!exito)
     {
-        for (int j = 0; j < columnas; j++)
+        
+        std::cout<<endl;
+        string inicial=nombre.substr(0,1);
+        for (int i = 0; i < filas; i++)
         {
-            if (i==0 && j==0)
+            for (int j = 0; j < columnas; j++)
             {
-                std::cout<<"I"<<" ";
-            }else if (i==filas-1 && j==columnas-1)
-            {
-                std::cout<<"F"<<" ";
-            }else if (laberinto[i][j]==0)
-            {
-                std::cout<<"X"<<" ";
-            }else{
-                std::cout<<" "<<" ";
+                if (i==x && j==y)
+                {
+                    std::cout<<inicial<<" ";
+                }else if (i==filas-1 && j==columnas-1)
+                {
+                    std::cout<<"F"<<" ";
+                }else if (laberinto[i][j]==0)
+                {
+                    std::cout<<"X"<<" ";
+                }else{
+                    std::cout<<" "<<" ";
+                }
+            }
+            std::cout<<endl;
+        }
+        
+        
+        
+        
+        int c = 0;
+        while(1)
+        {
+            c = 0;
+
+            switch((c=getch())) {
+            case KEY_UP:
+                limites(x,1,filas-1);
+                if (laberinto[x-1][y]!=0)
+                {
+                   x--;
+                }
+                break;
+            case KEY_DOWN:
+                limites(x,0,filas-2);
+                if (laberinto[x+1][y]!=0)
+                {
+                   x++;
+                }
+                break;
+            case KEY_LEFT:
+                limites(y,1,columnas-1);
+                if (laberinto[x][y-1]!=0)
+                {
+                   y--;
+                }
+                break;
+            case KEY_RIGHT:
+                limites(y,0,columnas-2);
+                if (laberinto[x][y+1]!=0)
+                {
+                   y++;
+                }
+                break;
+            default:
+                
+                break;
             }
         }
-        std::cout<<endl;
+        clrscr();
+        if (x==filas-1&&y==columnas-1)
+        {
+            exito=true;
+        }
     }
-    
-
-    
-   
-    
-
-
     return 0;
 }
 
@@ -131,4 +193,21 @@ int probabilidad(int a, int b, int pa, int pb){
         return a;
     if(n<=(pa+pb))
         return b;
+}
+
+//primer parametro, variable a ingresar,
+//segundo y tercero, límite inferior y superior respectivamente
+void limites(int& variable, int inferior,int superior){
+    if (variable<inferior)
+    {
+        variable++;
+    }else if (variable>superior)
+    {
+        variable--;
+    }
+}
+
+//Borrar informacion de pantalla
+void clrscr(){
+  system("cls");
 }
