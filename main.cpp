@@ -9,6 +9,7 @@ using namespace std;
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
+const int trampa=30;//la probabilidad de encontrar una trampa
 
 //DECLARACION DE FUNCIONES
 
@@ -21,6 +22,18 @@ void limites(int&, int ,int );
 //Borrar pantallas
 void clrscr();
 
+//funcion para imprimir barra de salud
+string salud(int);
+
+//yan ken po
+bool piedrapapel();
+
+//evaluar yankenpo
+int evaluaryankenpo(int , int );
+
+
+//escogido por sistema
+string yankenescogido(int);
 
 //JUEGO PRINCIPAL
 int main(){
@@ -63,8 +76,10 @@ int main(){
             if (((i==0)&&(j==0))||((i==filas-1)&&(j==columnas-1)))
             {
                 laberinto[i][j]=1;
+            }else if(laberinto[i][j-1]==1){
+                laberinto[i][j]=probabilidad(0,1,80,20);
             }else{
-                laberinto[i][j]=probabilidad(0,1,55,45);
+                laberinto[i][j]=probabilidad(0,1,50,50);
             }
             
         }
@@ -105,24 +120,28 @@ int main(){
             solucion=true;
         }  
     }
-
-
-    std::cout<<"Suerte en el desafio, "<<nombre<<endl;
+    int puntos_perdidos=100/((filas+columnas-1)*trampa/100);
+    std::cout<<"Suerte en el desafio, valiente "<<nombre<<endl;
     std::cout<<"Usa las flechas para moverte"<<endl;
     std::cout<<"Cuidado por donde pisas, puedes encontrar trampas en el camino"<<endl;
     system("pause");
-
-
     clrscr();
-    //imprimir laberinto
+    
+    //Inicia el juego
+    char muro = (char)254u;
     x=0;
     y=0;
+    int encuentra_trampa=0;
+    int estadosalud=100;
     bool exito=false;
+    bool juego=false;
     while (!exito)
     {
         std::cout<<"Cuidado por donde pisas, "<<nombre<<". Puedes encontrar trampas en el camino"<<endl;
+        std::cout<<"Salud:"<<salud(estadosalud);
         std::cout<<endl;
         string inicial=nombre.substr(0,1);
+        //imprime laberinto:
         for (int i = 0; i < filas; i++)
         {
             for (int j = 0; j < columnas; j++)
@@ -135,7 +154,7 @@ int main(){
                     std::cout<<"F"<<" ";
                 }else if (laberinto[i][j]==0)
                 {
-                    std::cout<<"X"<<" ";
+                    std::cout<<muro<<" ";
                 }else{
                     std::cout<<" "<<" ";
                 }
@@ -143,7 +162,7 @@ int main(){
             std::cout<<endl;
         }
         
-        
+        //selecciona una direccion para moverte
         int c = 0;
         while(c==0)
         {
@@ -182,11 +201,42 @@ int main(){
             }
         }
         
+        //evaluar la probabilidad de encontrarte con una trampa
+        encuentra_trampa=probabilidad(0,1,trampa,100-trampa);
+        if (encuentra_trampa==0)
+        {
+           std::cout<<endl;
+           std::cout<<"Trampa salvaje aparece"<<endl;
+           system("pause");
+           juego=piedrapapel();
+           
+           if (juego)
+           {
+            std::cout<<"Felicidades, puedes continuar tu viaje"<<endl;
+            system("pause");
+           }else{
+            std::cout<<"has perdido "<<puntos_perdidos<<" puntos de vida"<<endl;
+            system("pause");
+            estadosalud-=puntos_perdidos;
+                if (estadosalud<0)
+                {
+                    std::cout<<"Has perdido todos tus puntos de vida"<<endl;
+                    system("pause");
+                    std::cout<<"Game Over"<<endl;
+                    break;
+                }
+                
+           }
+           
+        }
+        
+
         clrscr();
         if (x==filas-1&&y==columnas-1)
         {
             exito=true;
-            std::cout<<"Felicidades, "<<nombre<<". Lograste salir del laberinto."<<endl;
+            std::cout<<"¡¡Felicidades, "<<nombre<<". Lograste salir del laberinto!!"<<endl;
+            system("pause");
         }
         
     }
@@ -202,8 +252,8 @@ int probabilidad(int a, int b, int pa, int pb){
     if(n<=pa)
         return a;
     if(n<=(pa+pb))
-        return b;
-    
+        return b;   
+    return 0;
 }
 
 //primer parametro, variable a ingresar,
@@ -218,8 +268,112 @@ void limites(int& variable, int inferior,int superior){
     }
 }
 
+//Devuelve barra de salud
+string salud(int valor){
+    char vida = (char)254u;
+    int cantidad=20*valor/100;
+    string salida="[";
+    for (int i = 0; i < 20; i++)
+    {
+        if (i<cantidad)
+        {
+            salida+=vida;
+        }else{
+            salida+=" ";
+        }
+    }
+    salida+="] "+to_string(valor)+"%";
+    return salida;
+}
 //Borrar informacion de pantalla
 void clrscr()
 {
   system("cls");
+}
+
+//trampa piedra papel o tijera
+bool piedrapapel(){
+    int jugadas=0;
+    int victorias=0;
+    int derrotas=0;
+    int yankenpo=0;
+    int n=0;
+    clrscr();
+    std::cout<<"Viajero salvaje: Vamos a Jugar al Yan Ken Po"<<endl;
+    std::cout<<"Si ganas dos de tres, te dejare seguir tu camino"<<endl;
+    system("pause");
+
+    while (derrotas<2&&victorias<2)
+    {
+        clrscr();
+        yankenpo=0;
+        std::cout<<"Jugadas: "<<jugadas<<endl;
+        std::cout<<"Victorias: "<<victorias<<endl;
+        std::cout<<"Derrotas: "<<derrotas<<endl;
+        std::cout<<"escoge:"<<endl;
+        std::cout<<"1. Piedra"<<endl;
+        std::cout<<"2. Papel"<<endl;
+        std::cout<<"3. Tijera"<<endl;
+        while (yankenpo<1||yankenpo>3)
+        {
+            std::cin>>yankenpo;
+        }
+        n =1+(rand()%3);
+
+        std::cout<<"Tu escogiste: "<<yankenescogido(yankenpo)<<endl;
+        std::cout<<"Yo escogi: "<<yankenescogido(n)<<endl;
+        system("pause");
+        if (evaluaryankenpo(yankenpo,n)==1)
+        {
+            std::cout<<"Ganaste esta vez"<<endl;
+            victorias++;
+        }else if(evaluaryankenpo(yankenpo,n)==2){
+            std::cout<<"Jaja eres muy malo para esto"<<endl;
+            derrotas++;
+        }else{
+            std::cout<<"Esta jugada no cuenta"<<endl;
+        }
+        jugadas++;
+        system("pause");
+    }
+    
+    if (victorias==2)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+int evaluaryankenpo(int a, int b){
+//1 piedra
+//2 papel
+//3 tijera
+//devuelve 1 gana jugador
+//devuelve 2 gana maquina
+//devuelve 3 empate
+    if ((a==1&&b==3)||(a==2&&b==1)||(a==3&&b==2))
+    {
+        return 1;
+    }else if(a==b){
+        return 3;
+    }
+    return 2;
+}
+
+string yankenescogido(int a){
+    switch (a)
+    {
+    case 1:
+        return "Piedra";
+        break;
+    case 2:
+        return "Papel";
+        break;
+    case 3:
+        return "Tijera";
+        break;
+    default:
+        break;
+    }
 }
