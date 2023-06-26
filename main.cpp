@@ -18,6 +18,9 @@ int probabilidad(int, int, int, int);
 //Funcion para establecer limite de movimiento
 void limites(int&, int ,int );
 
+//Borrar pantallas
+void clrscr();
+
 
 //JUEGO PRINCIPAL
 int main(){
@@ -136,10 +139,8 @@ int main(){
         
         
         int c = 0;
-        while(1)
+        while(c==0)
         {
-            c = 0;
-
             switch((c=getch())) {
             case KEY_UP:
                 limites(x,1,filas-1);
@@ -174,7 +175,8 @@ int main(){
                 break;
             }
         }
-        clrscr();
+        
+
         if (x==filas-1&&y==columnas-1)
         {
             exito=true;
@@ -193,6 +195,7 @@ int probabilidad(int a, int b, int pa, int pb){
         return a;
     if(n<=(pa+pb))
         return b;
+    
 }
 
 //primer parametro, variable a ingresar,
@@ -208,6 +211,3 @@ void limites(int& variable, int inferior,int superior){
 }
 
 //Borrar informacion de pantalla
-void clrscr(){
-  system("cls");
-}
