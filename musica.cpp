@@ -19,7 +19,7 @@ enum EFrequency {
 	keFS3 = 740, keG3 = 784, keGS3 = 830, keA3 = 880, keAS3 = 932, keB3 = 988,
 };
 enum EDuration {
-	ke16th = 100, ke8th = (ke16th << 1), keQuart = (ke8th << 1),
+	ke16th = 75, ke8th = (ke16th << 1), keQuart = (ke8th << 1),
 	keHalf = (keQuart << 1), keWhole = (keQuart << 1)
 };
 

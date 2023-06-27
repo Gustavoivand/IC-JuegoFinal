@@ -10,7 +10,7 @@ using namespace std;
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
-const int trampa=30;//la probabilidad de encontrar una trampa
+const int trampa=20;//la probabilidad de encontrar una trampa
 
 //DECLARACION DE FUNCIONES
 
