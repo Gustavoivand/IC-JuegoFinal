@@ -3,6 +3,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <conio.h>
+#include "musica.cpp"
 using namespace std;
 //VARIABLES GLOBALES
 #define KEY_UP 72
@@ -35,18 +36,36 @@ int evaluaryankenpo(int , int );
 //escogido por sistema
 string yankenescogido(int);
 
+
+
 //JUEGO PRINCIPAL
 int main(){
+    CMelody RoomOnFire1;
+    CMelody RoomOnFire2;
+    CMelody RoomOnFire3;
+    CMelody RoomOnFire4;
+    Melodia1(RoomOnFire1);
+    Melodia2(RoomOnFire2);
+    Melodia3(RoomOnFire3);
+    Melodia4(RoomOnFire4);
     srand(time(NULL));
     clrscr();
     //preguntar al usuario por el numero de filas y columnas de la matriz cuadrada
     std::cout<<"BIENVENIDO AL LABERINTO DE LA FC-UNI"<<endl;
+    RoomOnFire1.Play();
+    RoomOnFire1.Play();
     system("pause");
+    
     std::cout<<"Para comenzar ingresa tu nombre:"<<endl;
+    RoomOnFire2.Play();
+    RoomOnFire2.Play();
     string nombre;
     std::cin>>nombre;
+    
     std::cout<<"Bienvenido, "<<nombre<<endl;
     std::cout<<"Escoge la cantidad de filas de tu laberinto, recuerda que el mínimo posible es 4"<<endl;
+    RoomOnFire1.Play();
+    RoomOnFire1.Play();
     int filas;
     std::cin>>filas;
     while (filas<4)
@@ -54,7 +73,10 @@ int main(){
         std::cout<<"tu laberinto debe tener al menos 4 filas"<<endl;
         std::cin>>filas;
     }
+    
     std::cout<<"Escoge la cantidad de columnas de tu laberinto, recuerda que el mínimo posible es 4"<<endl;
+    RoomOnFire2.Play();
+    RoomOnFire2.Play();
     int columnas;
     std::cin>>columnas;
      while (columnas<4)
@@ -62,7 +84,7 @@ int main(){
         std::cout<<"tu laberinto debe tener al menos 4 columnas"<<endl;
         std::cin>>columnas;
     }
-
+    
     //crear laberinto
     int laberinto[filas][columnas];
     
@@ -124,6 +146,10 @@ int main(){
     std::cout<<"Suerte en el desafio, valiente "<<nombre<<endl;
     std::cout<<"Usa las flechas para moverte"<<endl;
     std::cout<<"Cuidado por donde pisas, puedes encontrar trampas en el camino"<<endl;
+    RoomOnFire1.Play();
+    RoomOnFire1.Play();
+    RoomOnFire2.Play();
+    
     system("pause");
     clrscr();
     
@@ -133,6 +159,8 @@ int main(){
     y=0;
     int encuentra_trampa=0;
     int estadosalud=100;
+    int pasos=0;
+    int contrapasos=0;
     bool exito=false;
     bool juego=false;
     while (!exito)
@@ -162,6 +190,11 @@ int main(){
             std::cout<<endl;
         }
         
+        if(contrapasos%2==0){
+            RoomOnFire1.Play();
+        }else{
+            RoomOnFire2.Play();
+        }
         //selecciona una direccion para moverte
         int c = 0;
         while(c==0)
@@ -207,12 +240,15 @@ int main(){
         {
            std::cout<<endl;
            std::cout<<"Trampa salvaje aparece"<<endl;
+           RoomOnFire3.Play();
+           RoomOnFire4.Play();
            system("pause");
            juego=piedrapapel();
            
            if (juego)
            {
             std::cout<<"Felicidades, puedes continuar tu viaje"<<endl;
+            
             system("pause");
            }else{
             std::cout<<"has perdido "<<puntos_perdidos<<" puntos de vida"<<endl;
@@ -238,7 +274,17 @@ int main(){
             std::cout<<"¡¡Felicidades, "<<nombre<<". Lograste salir del laberinto!!"<<endl;
             system("pause");
         }
+        pasos++;
+        if (pasos%2==0)
+        {
+            contrapasos=pasos/2;
+        }else{
+            contrapasos=(pasos+1)/2;
+        }
+
         
+
+
     }
     return 0;
 }
@@ -298,6 +344,9 @@ bool piedrapapel(){
     int derrotas=0;
     int yankenpo=0;
     int n=0;
+    CMelody RoomOnFire5;
+    Melodia5(RoomOnFire5);
+
     clrscr();
     std::cout<<"Viajero salvaje: Vamos a Jugar al Yan Ken Po"<<endl;
     std::cout<<"Si ganas dos de tres, te dejare seguir tu camino"<<endl;
@@ -322,6 +371,7 @@ bool piedrapapel(){
 
         std::cout<<"Tu escogiste: "<<yankenescogido(yankenpo)<<endl;
         std::cout<<"Yo escogi: "<<yankenescogido(n)<<endl;
+        RoomOnFire5.Play();
         system("pause");
         if (evaluaryankenpo(yankenpo,n)==1)
         {
