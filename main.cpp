@@ -52,20 +52,20 @@ int main(){
     clrscr();
     //preguntar al usuario por el numero de filas y columnas de la matriz cuadrada
     std::cout<<"BIENVENIDO AL LABERINTO DE LA FC-UNI"<<endl;
-    RoomOnFire1.Play();
-    RoomOnFire1.Play();
+    //RoomOnFire1.Play();
+    //RoomOnFire1.Play();
     system("pause");
     
     std::cout<<"Para comenzar ingresa tu nombre:"<<endl;
-    RoomOnFire2.Play();
-    RoomOnFire2.Play();
+    //RoomOnFire2.Play();
+    //RoomOnFire2.Play();
     string nombre;
     std::cin>>nombre;
     
     std::cout<<"Bienvenido, "<<nombre<<endl;
-    std::cout<<"Escoge la cantidad de filas de tu laberinto, recuerda que el mínimo posible es 4"<<endl;
-    RoomOnFire1.Play();
-    RoomOnFire1.Play();
+    std::cout<<"Escoge la cantidad de filas de tu laberinto, recuerda que el minimo posible es 4"<<endl;
+    //RoomOnFire1.Play();
+    //RoomOnFire1.Play();
     int filas;
     std::cin>>filas;
     while (filas<4)
@@ -74,9 +74,9 @@ int main(){
         std::cin>>filas;
     }
     
-    std::cout<<"Escoge la cantidad de columnas de tu laberinto, recuerda que el mínimo posible es 4"<<endl;
-    RoomOnFire2.Play();
-    RoomOnFire2.Play();
+    std::cout<<"Escoge la cantidad de columnas de tu laberinto, recuerda que el minimo posible es 4"<<endl;
+    //RoomOnFire2.Play();
+    //RoomOnFire2.Play();
     int columnas;
     std::cin>>columnas;
      while (columnas<4)
@@ -146,9 +146,9 @@ int main(){
     std::cout<<"Suerte en el desafio, valiente "<<nombre<<endl;
     std::cout<<"Usa las flechas para moverte"<<endl;
     std::cout<<"Cuidado por donde pisas, puedes encontrar trampas en el camino"<<endl;
-    RoomOnFire1.Play();
-    RoomOnFire1.Play();
-    RoomOnFire2.Play();
+    //RoomOnFire1.Play();
+    //RoomOnFire1.Play();
+    //RoomOnFire2.Play();
     
     system("pause");
     clrscr();
@@ -190,11 +190,8 @@ int main(){
             std::cout<<endl;
         }
         
-        if(contrapasos%2==0){
-            RoomOnFire1.Play();
-        }else{
-            RoomOnFire2.Play();
-        }
+        
+
         //selecciona una direccion para moverte
         int c = 0;
         while(c==0)
@@ -240,8 +237,8 @@ int main(){
         {
            std::cout<<endl;
            std::cout<<"Trampa salvaje aparece"<<endl;
-           RoomOnFire3.Play();
-           RoomOnFire4.Play();
+           //RoomOnFire3.Play();
+           //RoomOnFire4.Play();
            system("pause");
            juego=piedrapapel();
            
@@ -281,7 +278,11 @@ int main(){
         }else{
             contrapasos=(pasos+1)/2;
         }
-
+        if(contrapasos%2==0){
+            RoomOnFire1.Play();
+        }else{
+            RoomOnFire2.Play();
+        }
         
 
 
@@ -345,7 +346,7 @@ bool piedrapapel(){
     int yankenpo=0;
     int n=0;
     CMelody RoomOnFire5;
-    Melodia5(RoomOnFire5);
+    //Melodia5(RoomOnFire5);
 
     clrscr();
     std::cout<<"Viajero salvaje: Vamos a Jugar al Yan Ken Po"<<endl;
