@@ -10,7 +10,7 @@ using namespace std;
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
-const int trampa=20;//la probabilidad de encontrar una trampa
+const int trampa=15;//la probabilidad de encontrar una trampa
 
 //DECLARACION DE FUNCIONES
 
@@ -142,7 +142,7 @@ int main(){
             solucion=true;
         }  
     }
-    int puntos_perdidos=100/((filas+columnas-1)*trampa/100);
+    int puntos_perdidos=50/((filas+columnas-1)*trampa/100);
     std::cout<<"Suerte en el desafio, valiente "<<nombre<<endl;
     std::cout<<"Usa las flechas para moverte"<<endl;
     std::cout<<"Cuidado por donde pisas, puedes encontrar trampas en el camino"<<endl;
@@ -160,7 +160,7 @@ int main(){
     int encuentra_trampa=0;
     int estadosalud=100;
     int pasos=0;
-    int contrapasos=0;
+    //int contrapasos=0;
     bool exito=false;
     bool juego=false;
     while (!exito)
@@ -272,7 +272,7 @@ int main(){
             system("pause");
         }
         pasos++;
-        if (pasos%2==0)
+        /*if (pasos%2==0)
         {
             contrapasos=pasos/2;
         }else{
@@ -282,7 +282,7 @@ int main(){
             RoomOnFire1.Play();
         }else{
             RoomOnFire2.Play();
-        }
+        }*/
         
 
 
@@ -300,7 +300,7 @@ int probabilidad(int a, int b, int pa, int pb){
         return a;
     if(n<=(pa+pb))
         return b;   
-    return 0;
+    
 }
 
 //primer parametro, variable a ingresar,
